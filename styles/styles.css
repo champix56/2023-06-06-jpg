@@ -39,3 +39,6 @@
     height: calc(98vh - 130px);
     text-align: center;
 }
+.small-number{
+    width:70px;
+}
