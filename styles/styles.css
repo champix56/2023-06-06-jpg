@@ -1,7 +1,8 @@
 #main {
-    height: 98vh;
+    height: 97vh;
     display: flex;
     flex-direction: column;
+    overflow-y: hidden;
 }
 
 #header {
@@ -26,18 +27,15 @@
     display: flex;
     width: 100%;
 }
-
-#container-svg {
+#svg-container {
     flex-grow: 1;
     width: 100%;
     text-align: center;
-    height: calc(98vh - 200px);
 }
-
 #form-container {
-    flex:1;
+    /* flex:1; */
     overflow-y: auto;
-    width: 200px;
-    height: calc(98vh - 200px);
+    /* width: 200px; */
+    height: calc(98vh - 130px);
     text-align: center;
 }
