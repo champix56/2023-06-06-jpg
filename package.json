@@ -16,6 +16,8 @@
   },
   "homepage": "https://github.com/champix56/2023-06-06-jpg#readme",
   "dependencies": {
+    "bootstrap": "^3.3.7",
+    "jQuery": "^1.7.4",
     "lite-server": "^2.6.1"
   }
 }
