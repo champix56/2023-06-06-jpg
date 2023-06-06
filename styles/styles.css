@@ -1,20 +1,43 @@
-#main{
-    height:98vh;
+#main {
+    height: 98vh;
     display: flex;
     flex-direction: column;
 }
-#header{
-    font-size:xx-large;
+
+#header {
+    font-size: xx-large;
     font-weight: 900;
-    color:skyblue;
+    color: skyblue;
 }
-#main-wrapper{
+
+#main-wrapper {
     flex-grow: 1;
 }
-#footer{
+
+#footer {
     position: fixed;
     bottom: 0;
     left: 0;
     right: 0;
+    text-align: center;
+}
+
+#flex-cols2 {
+    display: flex;
+    width: 100%;
+}
+
+#container-svg {
+    flex-grow: 1;
+    width: 100%;
+    text-align: center;
+    height: calc(98vh - 200px);
+}
+
+#form-container {
+    flex:1;
+    overflow-y: auto;
+    width: 200px;
+    height: calc(98vh - 200px);
     text-align: center;
 }
