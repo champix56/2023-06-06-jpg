@@ -50,5 +50,94 @@ class Modal {
         this.#modalNode.querySelector('#modal-content').innerHTML = content
         document.body.appendChild(this.#modalNode)
     }
+    /**
+     * set buttons content
+     * @param {Array<HTMLElement>} btnArray liste des noeuds pour les button avec event prealablement gerés
+     */
+    setButtons=(btnArray)=>{
+        this.#modalNode.querySelector('#modal-button').innerHTML=''
+        btnArray.forEach((iterr,i,liste)=>{
+             this.#modalNode.querySelector('#modal-button').appendChild(iterr);
+             iterr.addEventListener('click',this.#removeModal);
+        })
+       
+    }
 }
-//const modal = new Modal('modal')
+class ConfirmBox extends Modal{
+    #okCallback;
+    #okButton;
+    set okCallback(fn){
+        if(typeof fn === 'function'){
+            this.#okCallback=fn;
+        }
+    }
+    constructor(okfn){
+        super()
+        this.okCallback=okfn
+        // creation du button
+        this.#okButton = document.createElement('button')
+        this.#okButton.className="btn btn-primary"
+        this.#okButton.innerHTML='OK'
+        this.#okButton.type='button'
+        // ajout d'event sur le button
+        this.#okButton.addEventListener('click',()=>{
+        if(typeof this.#okCallback === 'function'){    this.#okCallback()}
+        })
+        //appel d'une fonction public du parent lié a notre instance étendue
+        this.setButtons([this.#okButton]);
+    }
+    showMessageBox=(titre,content,okfn)=>{
+        this.okCallback=okfn
+        this.showModal(titre,content)
+    }
+}
+class MessageBox extends Modal{
+    #okCallback;
+    #okButton;
+    set okCallback(fn){
+        if(typeof fn === 'function'){
+            this.#okCallback=fn;
+        }
+    }
+    #cancelCallback;
+    #cancelButton;
+    set cancelCallback(fn){
+        if(typeof fn === 'function'){
+            this.#cancelCallback=fn;
+        }
+    }
+    constructor(okfn,cancelfn){
+        super()
+        this.okCallback=okfn
+        // creation du button
+        this.#okButton = document.createElement('button')
+        this.#okButton.className="btn btn-primary"
+        this.#okButton.innerHTML='OK'
+        this.#okButton.type='button'
+        // ajout d'event sur le button
+        this.#okButton.addEventListener('click',()=>{
+        if(typeof this.#okCallback === 'function'){    this.#okCallback()}
+        })
+
+        this.cancelCallback=cancelfn
+        // creation du button
+        this.#cancelButton = document.createElement('button')
+        this.#cancelButton.className="btn btn-danger"
+        this.#cancelButton.innerHTML='Annul'
+        this.#cancelButton.type='button'
+        // ajout d'event sur le button
+        this.#cancelButton.addEventListener('click',()=>{
+        if(typeof this.#cancelCallback === 'function'){    this.#cancelCallback()}
+        })
+        //appel d'une fonction public du parent lié a notre instance étendue
+        this.setButtons([this.#okButton,this.#cancelButton])
+    }
+    showMessageBox=(titre,content,okfn,cancelfn)=>{
+        this.okCallback=okfn
+        this.cancelCallback=cancelfn
+        this.showModal(titre,content)
+    }
+}
+console.time('constructMsgBox')
+const msgBox=new MessageBox();
+console.timeEnd('constructMsgBox')
