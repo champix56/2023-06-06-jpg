@@ -1,7 +1,6 @@
-
-
-
-
+/**
+ * class modal sans affichage de fermeture
+ */
 class Modal {
     /**
      * contenu html de la modal de base
@@ -52,4 +51,4 @@ class Modal {
         document.body.appendChild(this.#modalNode)
     }
 }
-const modal = new Modal('modal')
+//const modal = new Modal('modal')
