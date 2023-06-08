@@ -63,7 +63,7 @@ class Modal {
        
     }
 }
-export class ConfirmBox extends Modal{
+export class MessageBox extends Modal{
     #okCallback;
     #okButton;
     set okCallback(fn){
@@ -91,7 +91,7 @@ export class ConfirmBox extends Modal{
         this.showModal(titre,content)
     }
 }
-export class MessageBox extends Modal{
+export class ConfirmBox extends Modal{
     #okCallback;
     #okButton;
     set okCallback(fn){
