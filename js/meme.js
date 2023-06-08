@@ -1,3 +1,4 @@
+import { ADR_REST as REST_ADR } from "./config.js"
 class Meme {
     static ressourceName = '/memes'
     titre = ""
@@ -12,12 +13,28 @@ class Meme {
     color = "#000000"
     frameSizeX = 0
     frameSizeY = 0
-    save = () => { }
+    get #fullRessourceName() {
+        return `${undefined !== this.id ? Meme.ressourceName + '/' + this.id : Meme.ressourceName
+            }`
+    }
+    save = () => {
+        fetch(`${REST_ADR}${this.#fullRessourceName}`, {
+            method: undefined !== this.id ? 'PUT' : 'POST',
+            headers: {
+                "Content-Type": 'application/json'
+            },
+            body: JSON.stringify(this)
+        })
+            .then(retour => retour.json())
+            .then(transformedFormRest => {
+                this.id=transformedFormRest.id;
+            })
+    }
     deserialize = (genriqueObject) => {
 
     }
 }
-class Memes extends Array {
+export class Memes extends Array {
     static ressourceName = '/memes'
     constructor() {
         super();
@@ -38,10 +55,10 @@ class Memes extends Array {
                     const meme = new Meme()
                     Object.assign(meme, unique)
                     console.log(meme)
-                    this.push(Object.freeze(meme))
+                    this.push(Object.seal(meme))
                 })
                 return arr
             })
     }
 }
-const listeMemes = new Memes()
+//const listeMemes = new Memes()
