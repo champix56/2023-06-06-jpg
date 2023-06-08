@@ -1,4 +1,4 @@
-import { ADR_REST } from "./config";
+import { ADR_REST } from "../config/config.js";
 export class Images extends Array {
     static ressourceName = '/images'
 /**

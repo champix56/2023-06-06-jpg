@@ -1,4 +1,4 @@
-import { ADR_REST as REST_ADR } from "./config.js"
+import { ADR_REST as REST_ADR } from "../config/config.js"
 class Meme {
     static ressourceName = '/memes'
     titre = ""
@@ -54,7 +54,7 @@ export class Memes extends Array {
                 arr.forEach(unique => {
                     const meme = new Meme()
                     Object.assign(meme, unique)
-                    console.log(meme)
+                    //console.log(meme)
                     this.push(Object.seal(meme))
                 })
                 return arr
