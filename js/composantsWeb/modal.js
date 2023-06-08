@@ -42,7 +42,7 @@ class Modal {
  * @param {string} titre titre du message
  * @param {HTMLElement|string} content contenu html du message
  */
-    show = (titre, content) => {
+     show  (titre, content)  {
         if (null !== this.#modalNode) {
             this.#removeModal()
         }
@@ -88,7 +88,7 @@ export class MessageBox extends Modal{
     }
     show=(titre,content,okfn)=>{
         this.okCallback=okfn
-        super.showModal(titre,content)
+        super.show(titre,content)
     }
 }
 export class ConfirmBox extends Modal{
@@ -135,7 +135,7 @@ export class ConfirmBox extends Modal{
     show=(titre,content,okfn,cancelfn)=>{
         this.okCallback=okfn
         this.cancelCallback=cancelfn
-        super.showModal(titre,content)
+        super.show(titre,content)
     }
 }
 // console.time('constructMsgBox')
