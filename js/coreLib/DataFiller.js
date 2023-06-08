@@ -6,6 +6,7 @@ export class DataFiller {
         while (m = DataFiller.filterHTMLRegex.exec(templateText)) {
             const toExec = m.groups.js
             const execResult = eval(toExec)
+            //si primitive compatible string
             if (typeof execResult !== 'object' && typeof execResult !== 'function') { 
                 templateText = templateText.replace(m[0], execResult)
             }

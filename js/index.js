@@ -1,9 +1,6 @@
-import { MessageBox, ConfirmBox } from "./composantsWeb/modal.js";
-import { Memes } from './coreLib/meme.js'
-import { Images } from "./coreLib/images.js";
-import { RouterDOM } from "./router.js";
+import { RouterDOM } from "./coreLib/router.js";
 import { listeImgs, listeMemes } from "./coreLib/dataInstance.js";
-const router=new RouterDOM();
+import router from './coreLib/router.js'
 
 class MemesDOM {
     listeMemes = listeMemes

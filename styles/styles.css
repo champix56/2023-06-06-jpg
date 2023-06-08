@@ -13,6 +13,8 @@
 
 #main-wrapper {
     flex-grow: 1;
+    height: auto;
+    overflow-y:auto ;
 }
 
 #footer {
