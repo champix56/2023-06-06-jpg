@@ -1,6 +1,7 @@
 import { MessageBox, ConfirmBox } from "./composantsWeb/modal.js";
 import { Memes } from './coreLib/meme.js'
 import { Images } from "./coreLib/images.js";
+import './router.js'
 //const msgBox=new MessageBox();
 
 
