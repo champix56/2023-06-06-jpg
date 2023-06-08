@@ -3,16 +3,26 @@ import { listeImgs, listeMemes } from "./coreLib/dataInstance.js"
 
 const routes = [
     {
-        name:'editor', 
-        pathName: '/meme', 
-        viewUrl: '/views/editor.html', 
-        pathRegex: /^\/meme(\/(?<id>\d{0,})?)?\/?$/ 
+        name: 'editor',
+        pathName: '/meme',
+        viewUrl: '/views/editor.html',
+        pathRegex: /^\/meme(\/(?<id>\d{0,})?)?\/?$/
     },
     {
-        name:'thumb', pathName: '/thumbnail', viewUrl: '/views/thumbnail.html', pathRegex: /^\/thumbnail\/?$/,
-        data:{memes:listeMemes, images:listeImgs} 
+        name: 'thumb', pathName: '/thumbnail', viewUrl: '/views/thumbnail.html', pathRegex: /^\/thumbnail\/?$/,
+        data: { memes: listeMemes, images: listeImgs, },
     },
-    {name:'home', pathName: '/', viewUrl: '/views/home.html', pathRegex: /^\/(home)?\/?$/ },
+    { 
+        name: 'home', 
+        pathName: '/', 
+        viewUrl: '/views/home.html', 
+        pathRegex: /^\/(home)?\/?$/, 
+    },
+    { 
+        name: '404', 
+        templateText:'<h1>On t\'a de dit de pas venir sur ce liens</h1><hr/><h3>ERROR : 404 NOT FOUND</h3>',
+        pathRegex:/404/
+    },
 ]
 export class RouterDOM {
     #currentUrl
@@ -26,8 +36,8 @@ export class RouterDOM {
         this.#currentUrl = window.location.pathname
     }
     manageRoute = () => {
-        this.#currentUrl=window.location.pathname
-        this.#currentRoute=routes.find(route => {
+        this.#currentUrl = window.location.pathname
+        this.#currentRoute = routes.find(route => {
             const m = route.pathRegex.exec(this.#currentUrl)
             if (null === m) return false
             else {
@@ -35,8 +45,13 @@ export class RouterDOM {
                 return true
             }
         })
-        //let templateText=sessionStorage.getItem(this.#currentRoute.name)
-        if(undefined!==this.#currentRoute.templateText){
+        if(undefined===this.#currentRoute){
+            //preservation de la route
+            //this.#currentRoute=routes.find(e=>e.name==='404')
+            //sans preservation de la route avec redirection
+            return this.currentRoute='/404'
+        }
+        if (undefined !== this.#currentRoute.templateText) {
             this.#wrapTemplate(this.#currentRoute)
         }
         else {
@@ -44,17 +59,17 @@ export class RouterDOM {
         }
     }
 
-    #loadTemplate=(route)=>{
+    #loadTemplate = (route) => {
         fetch(route.viewUrl)
-            .then(f=>f.text())
-            .then(text=>{
+            .then(f => f.text())
+            .then(text => {
                 //sessionStorage.setItem(route.name,text);
-                this.#currentRoute.templateText=text
+                this.#currentRoute.templateText = text
                 this.#wrapTemplate(this.#currentRoute);
             })
     }
-    #wrapTemplate=(route)=>{
-        const wrapper=document.querySelector('#main-wrapper')
-        wrapper.innerHTML=route.templateText;
+    #wrapTemplate = (route) => {
+        const wrapper = document.querySelector('#main-wrapper')
+        wrapper.innerHTML = route.templateText;
     }
 }
