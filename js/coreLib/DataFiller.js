@@ -1,6 +1,6 @@
 
 export class DataFiller {
-    static filterHTMLRegex = /{{(?<js>([<>\w\d'"!?:\[\];,=().*\/+-])*|^({{2,})|^(}{2,}))}}/gm
+    static filterHTMLRegex = /{{(?<js>(([\s\w\d"!?:\[\];,=().*\/+<-])*|('.{0,}')|(>{{0,1}[^{])|(.[^{]}))*)}}/gm
     static fillView = (data, templateText) => {
         let m;
         while (m = DataFiller.filterHTMLRegex.exec(templateText)) {
