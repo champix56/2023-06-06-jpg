@@ -2,11 +2,12 @@ import { MessageBox, ConfirmBox } from "./composantsWeb/modal.js";
 import { Memes } from './coreLib/meme.js'
 import { Images } from "./coreLib/images.js";
 import { RouterDOM } from "./router.js";
+import { listeImgs, listeMemes } from "./coreLib/dataInstance.js";
 const router=new RouterDOM();
 
 class MemesDOM {
-    listeMemes = new Memes();
-    listeImgs = new Images();
+    listeMemes = listeMemes
+    listeImgs = listeImgs;
     constructor() {
         document.addEventListener('DOMContentLoaded', () => {
             this.initNavbarLinks();
@@ -16,6 +17,7 @@ class MemesDOM {
 
                 return promisesValues
             })
+            router.manageRoute();
         })
     }
     initNavbarLinks=()=>{
