@@ -1,3 +1,7 @@
 <div>
-    {{JSON.stringify(listeMemes)}}
+    <h2>voici le debug JSON</h2>
+    {{JSON.stringify(data.memes)}}
+    <hr/>
+    voici la liste visuel des svg
+    {{data.memes.map(e=>'<div>Hello</div>')}}
 </div>

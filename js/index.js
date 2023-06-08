@@ -14,10 +14,11 @@ class MemesDOM {
             //sync des chargements
             Promise.all([this.listeImgs.load(),this.listeMemes.load()])
             .then(promisesValues=>{
-
+                router.manageRoute();
+                console.log(promisesValues);
                 return promisesValues
             })
-            router.manageRoute();
+           
         })
     }
     initNavbarLinks=()=>{
