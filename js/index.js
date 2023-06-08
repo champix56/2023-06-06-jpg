@@ -1,20 +1,40 @@
 import { MessageBox, ConfirmBox } from "./composantsWeb/modal.js";
 import { Memes } from './coreLib/meme.js'
 import { Images } from "./coreLib/images.js";
-import './router.js'
-//const msgBox=new MessageBox();
-
+import { RouterDOM } from "./router.js";
+const router=new RouterDOM();
 
 class MemesDOM {
     listeMemes = new Memes();
     listeImgs = new Images();
     constructor() {
         document.addEventListener('DOMContentLoaded', () => {
+            this.initNavbarLinks();
             //sync des chargements
             Promise.all([this.listeImgs.load(),this.listeMemes.load()])
             .then(promisesValues=>{
 
                 return promisesValues
+            })
+        })
+    }
+    initNavbarLinks=()=>{
+        document.querySelectorAll('.navbar-home').forEach(link=>{
+            link.addEventListener('click',(evt)=>{
+                evt.preventDefault();
+                router.currentRoute='/'
+            })
+        })
+        document.querySelectorAll('.navbar-thumbnail').forEach(link=>{
+            link.addEventListener('click',(evt)=>{
+                evt.preventDefault();
+                router.currentRoute='/thumbnail'
+            })
+        })
+        document.querySelectorAll('.navbar-meme').forEach(link=>{
+            link.addEventListener('click',(evt)=>{
+                evt.preventDefault();
+                router.currentRoute='/meme'
             })
         })
     }
