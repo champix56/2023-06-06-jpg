@@ -18,21 +18,28 @@ class MemesDOM {
            
         })
     }
+    
     initNavbarLinks=()=>{
         document.querySelectorAll('.navbar-home').forEach(link=>{
             link.addEventListener('click',(evt)=>{
                 evt.preventDefault();
+                router.removeActiveNavbarLink()
+                evt.target.parentNode.classList.add('active')
                 router.currentRoute='/'
             })
         })
         document.querySelectorAll('.navbar-thumbnail').forEach(link=>{
             link.addEventListener('click',(evt)=>{
                 evt.preventDefault();
+                router.removeActiveNavbarLink()
+                evt.target.parentNode.classList.add('active')
                 router.currentRoute='/thumbnail'
             })
         })
         document.querySelectorAll('.navbar-meme').forEach(link=>{
             link.addEventListener('click',(evt)=>{
+                router.removeActiveNavbarLink()
+                evt.target.parentNode.classList.add('active')
                 evt.preventDefault();
                 router.currentRoute='/meme'
             })

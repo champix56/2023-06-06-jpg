@@ -26,6 +26,7 @@ export class ThumbnailController {
         aSection.href='/memes/'+m.id
         aSection.addEventListener('click',evt=>{
             evt.preventDefault()
+            router.removeActiveNavbarLink()
             router.currentRoute=`/meme/${m.id}`
         })
         const sectionsvg=memeNode.querySelector('svg')

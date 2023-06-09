@@ -60,6 +60,12 @@ export class RouterDOM {
     if (undefined !== this.#currentRoute.controller) {
       this.#currentRoute.controller.refresh()
     }
-  };
+  }
+removeActiveNavbarLink(){
+  document.querySelectorAll('nav .active').forEach(e=>{
+    e.classList.remove('active')
+  })
+
+}
 }
 export default new RouterDOM();
