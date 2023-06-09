@@ -13,6 +13,8 @@
 
 #main-wrapper {
     flex-grow: 1;
+    height: auto;
+    overflow-y:auto ;
 }
 
 #footer {
@@ -22,23 +24,19 @@
     right: 0;
     text-align: center;
 }
-
-#flex-cols2 {
-    display: flex;
-    width: 100%;
+#header{
+    text-align: left;
+    font-size: 32px;
+    font-weight: 900;
+    padding: 5px 10px;
+    border-bottom: 1px solid #a9a9a9;
+    text-shadow: 10px 15px 10px #c5c5c5;
+    cursor: pointer;
 }
-#svg-container {
-    flex-grow: 1;
-    width: 100%;
-    text-align: center;
+#header .meme{
+    color: tomato;
 }
-#form-container {
-    /* flex:1; */
-    overflow-y: auto;
-    /* width: 200px; */
-    height: calc(98vh - 130px);
-    text-align: center;
-}
-.small-number{
-    width:70px;
+#header .js{
+    color: #87ceeb;
+    font-style: italic;
 }
