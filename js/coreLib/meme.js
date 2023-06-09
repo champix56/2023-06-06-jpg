@@ -28,7 +28,7 @@ export class Meme {
             .then(retour => retour.json())
             .then(transformedFormRest => {
                 this.id=transformedFormRest.id;
-                if(typeof callback==='function'){callback(this)}
+                if(typeof callback==='function'){callback(Object.assign(this,transformedFormRest))}
             })
     }
     deserialize = (genriqueObject) => {

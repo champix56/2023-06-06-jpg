@@ -1,3 +1,4 @@
+import { ConfirmBox } from "../composantsWeb/modal.js"
 import { listeImgs, listeMemes } from "../coreLib/dataInstance.js"
 import { Meme } from "../coreLib/meme.js"
 import router from "../coreLib/router.js"
@@ -35,53 +36,75 @@ export class EditorController {
     }
     initView() {
         const form = this.wrapper.querySelector('form')
+        form.addEventListener('submit', evt => {
+            evt.preventDefault();
+            (new ConfirmBox(() => {
+                this.#currentMeme.save((obj)=>{
+                    //si l'objet existe dans la liste je le remplace 
+                    const position=this.listesMemes.findIndex(m=>m.id===obj.id)
+                    if(position>=0){
+                        this.listesMemes[position]=obj
+                    }
+                    //sinon je l'ajoute a la liste avec son id retourner par le rest
+                    else{
+                        this.listesMemes.push(obj)
+                    }
+                    console.log(this.listesMemes);
+                    router.currentRoute='/thumbnail'
+                });
+            })).show('Enregistrer', 'souhaitez vous enregistrer ce meme?')
+        })
+
+
+
+
         form['image'].addEventListener('change', (evt) => {
             this.#currentMeme.imageId = Number(evt.target.value)
             this.#currentImage = this.listeImages.find(i => i.id === this.#currentMeme.imageId)
             this.refreshSvg()
         })
-        form['titre'].addEventListener('input',evt=>{
-            this.#currentMeme.titre=evt.target.value
+        form['titre'].addEventListener('input', evt => {
+            this.#currentMeme.titre = evt.target.value
             //this.refreshSvg()
         })
-        form['text'].addEventListener('input',evt=>{
-            this.#currentMeme.text=evt.target.value
+        form['text'].addEventListener('input', evt => {
+            this.#currentMeme.text = evt.target.value
             this.refreshSvg()
         })
-        form['color'].addEventListener('input',evt=>{
-            this.#currentMeme.color=evt.target.value
+        form['color'].addEventListener('input', evt => {
+            this.#currentMeme.color = evt.target.value
             this.refreshSvg()
         })
-        form['x'].addEventListener('input',evt=>{
-            this.#currentMeme.x=Number(evt.target.value)
+        form['x'].addEventListener('input', evt => {
+            this.#currentMeme.x = Number(evt.target.value)
             this.refreshSvg()
         })
-        form['y'].addEventListener('input',evt=>{
-            this.#currentMeme.y=Number(evt.target.value)
+        form['y'].addEventListener('input', evt => {
+            this.#currentMeme.y = Number(evt.target.value)
             this.refreshSvg()
         })
-        form['fontWeight'].addEventListener('input',evt=>{
-            this.#currentMeme.fontWeight=evt.target.value
+        form['fontWeight'].addEventListener('input', evt => {
+            this.#currentMeme.fontWeight = evt.target.value
             this.refreshSvg()
         })
-        form['fontSize'].addEventListener('input',evt=>{
-            this.#currentMeme.fontSize=Number(evt.target.value)
+        form['fontSize'].addEventListener('input', evt => {
+            this.#currentMeme.fontSize = Number(evt.target.value)
             this.refreshSvg()
         })
-        form['underline'].addEventListener('input',evt=>{
-            this.#currentMeme.underline=evt.target.checked
+        form['underline'].addEventListener('input', evt => {
+            this.#currentMeme.underline = evt.target.checked
             this.refreshSvg()
         })
-        form['italic'].addEventListener('input',evt=>{
-            this.#currentMeme.italic=evt.target.checked
+        form['italic'].addEventListener('input', evt => {
+            this.#currentMeme.italic = evt.target.checked
             this.refreshSvg()
         })
-        form['frameSizeX'].addEventListener('input',evt=>{
-            this.#currentMeme.frameSizeX=Number(evt.target.value)
+        form['frameSizeX'].addEventListener('input', evt => {
+            this.#currentMeme.frameSizeX = Number(evt.target.value)
             this.refreshSvg()
         })
-        form['frameSizeY'].addEventListener('input',evt=>{
-            this.#currentMeme.frameSizeY=Number(evt.target.value)
+        form['frameSizeY'].addEventListener('input', evt => {
+            this.#currentMeme.frameSizeY = Number(evt.target.value)
             this.refreshSvg()
         })
         this.refresh()
@@ -138,21 +161,21 @@ export class EditorController {
         }
         svgImageNode.remove()
         if (undefined !== this.#currentImage) {
-            svgNode.setAttribute('viewBox', `${-this.#currentMeme.frameSizeX} ${-this.#currentMeme.frameSizeY} ${this.#currentImage.w+(this.#currentMeme.frameSizeX*2)} ${this.#currentImage.h+(this.#currentMeme.frameSizeY*2)}`)
+            svgNode.setAttribute('viewBox', `${-this.#currentMeme.frameSizeX} ${-this.#currentMeme.frameSizeY} ${this.#currentImage.w + (this.#currentMeme.frameSizeX * 2)} ${this.#currentImage.h + (this.#currentMeme.frameSizeY * 2)}`)
             svgImageNode.setAttribute('xlink:href', this.#currentImage.url)
             svgNode.insertBefore(svgImageNode, textNode)
         }
         else {
-            svgNode.setAttribute('viewBox', `${-this.#currentMeme.frameSizeX} ${-this.#currentMeme.frameSizeY} ${1000+(this.#currentMeme.frameSizeX*2)} ${1000+(this.#currentMeme.frameSizeY*2)}`)
+            svgNode.setAttribute('viewBox', `${-this.#currentMeme.frameSizeX} ${-this.#currentMeme.frameSizeY} ${1000 + (this.#currentMeme.frameSizeX * 2)} ${1000 + (this.#currentMeme.frameSizeY * 2)}`)
         }
         textNode.innerHTML = this.#currentMeme.text
         textNode.setAttribute('x', this.#currentMeme.x)
         textNode.setAttribute('y', this.#currentMeme.y)
-        textNode.style.fontSize=this.#currentMeme.fontSize
-        textNode.style.fontWeight=this.#currentMeme.fontWeight
-        textNode.style.fill=this.#currentMeme.color
-        textNode.style.textDecoration=this.#currentMeme.underline?'underline':'none'
-        textNode.style.fontStyle=this.#currentMeme.italic?'italic':'normal'
+        textNode.style.fontSize = this.#currentMeme.fontSize
+        textNode.style.fontWeight = this.#currentMeme.fontWeight
+        textNode.style.fill = this.#currentMeme.color
+        textNode.style.textDecoration = this.#currentMeme.underline ? 'underline' : 'none'
+        textNode.style.fontStyle = this.#currentMeme.italic ? 'italic' : 'normal'
 
     }
 

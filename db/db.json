@@ -38,22 +38,21 @@
   ],
   "memes": [
     {
-      "id": 0,
       "titre": "React n'roll",
-      "text": "React n'roll",
-      "x": 100,
+      "text": "coucou",
+      "x": 600,
       "y": 20,
       "fontWeight": "500",
-      "fontSize": 30,
-      "underline": false,
-      "italic": false,
-      "imageId": 0,
-      "color": "#000000",
+      "fontSize": 600,
+      "underline": true,
+      "italic": true,
+      "imageId": 1,
+      "color": "#a80000",
       "frameSizeX": 0,
-      "frameSizeY": 0
+      "frameSizeY": 600,
+      "id": 0
     },
     {
-      "id": 1,
       "titre": "Long wait",
       "text": "Long wait",
       "x": 100,
@@ -65,7 +64,8 @@
       "imageId": 3,
       "color": "#000000",
       "frameSizeX": 0,
-      "frameSizeY": 0
+      "frameSizeY": 0,
+      "id": 1
     },
     {
       "titre": "",
@@ -156,6 +156,36 @@
       "frameSizeX": 0,
       "frameSizeY": 0,
       "id": 7
+    },
+    {
+      "titre": "ffgr",
+      "text": "JPG ",
+      "x": 200,
+      "y": 100,
+      "fontWeight": "500",
+      "fontSize": 80,
+      "underline": false,
+      "italic": true,
+      "imageId": 0,
+      "color": "#e61919",
+      "frameSizeX": 0,
+      "frameSizeY": 101,
+      "id": 8
+    },
+    {
+      "titre": "",
+      "text": "",
+      "x": 0,
+      "y": 20,
+      "fontWeight": "500",
+      "fontSize": 20,
+      "underline": false,
+      "italic": true,
+      "imageId": -1,
+      "color": "#000000",
+      "frameSizeX": 0,
+      "frameSizeY": 0,
+      "id": 9
     }
   ]
 }
