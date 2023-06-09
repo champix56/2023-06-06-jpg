@@ -17,7 +17,7 @@ export class Meme {
         return `${undefined !== this.id ? Meme.ressourceName + '/' + this.id : Meme.ressourceName
             }`
     }
-    save = () => {
+    save = (callback) => {
         fetch(`${REST_ADR}${this.#fullRessourceName}`, {
             method: undefined !== this.id ? 'PUT' : 'POST',
             headers: {
@@ -28,6 +28,7 @@ export class Meme {
             .then(retour => retour.json())
             .then(transformedFormRest => {
                 this.id=transformedFormRest.id;
+                if(typeof callback==='function'){callback(this)}
             })
     }
     deserialize = (genriqueObject) => {
