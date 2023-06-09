@@ -1,4 +1,4 @@
-// import { EditorController } from "../controllers/EditorController.js";
+import { EditorController } from "../controllers/EditorController.js";
 import { ThumbnailController } from "../controllers/ThumbnailController.js";
 import { listeImgs, listeMemes } from "../coreLib/dataInstance.js";
 
@@ -8,7 +8,7 @@ export const routes = [
     pathName: "/meme",
     viewUrl: "/views/editor.html",
     pathRegex: /^\/meme(\/(?<id>\d{0,})?)?\/?$/,
-    // controller:new EditorController()
+    controller:new EditorController()
   },
   {
     name: "thumb",

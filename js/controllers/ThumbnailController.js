@@ -8,6 +8,9 @@ export class ThumbnailController {
     this.memes = memes;
     this.images = images;
   }
+  initView(){
+    this.refresh(); 
+  }
   refresh = () => {
     if (undefined === this.wrapper) {
       console.log("%c%s", "color:red", "le wrapper est pas definit")

@@ -54,7 +54,7 @@ export class RouterDOM {
     if (undefined !== this.#currentRoute.controller) {
       this.#currentRoute.controller.wrapper = RouterDOM.viewWrapper
       this.#currentRoute.controller.params = this.#currentParams
-      this.refresh()
+      this.#currentRoute.controller.initView();
     }
   };
   refresh = () => {
