@@ -7,7 +7,7 @@ export class RouterDOM {
   }
   #currentUrl;
   #currentRoute;
-  currentParams;
+  #currentParams;
   set currentRoute(urlStr) {
     window.history.pushState(null, null, urlStr);
     this.manageRoute();
@@ -17,11 +17,12 @@ export class RouterDOM {
   }
   manageRoute = () => {
     this.#currentUrl = window.location.pathname;
+    this.#currentParams={}
     this.#currentRoute = routes.find((route) => {
       const m = route.pathRegex.exec(this.#currentUrl);
       if (null === m) return false;
       else {
-        this.currentParams = m.groups;
+        this.#currentParams = undefined!==m.groups?m.groups:{};
         return true;
       }
     });
@@ -51,6 +52,7 @@ export class RouterDOM {
     RouterDOM.viewWrapper.innerHTML = this.#currentRoute.templateText
     if (undefined !== this.#currentRoute.controller) {
       this.#currentRoute.controller.wrapper=RouterDOM.viewWrapper
+      this.#currentRoute.controller.params=this.#currentParams
       this.refresh()
     }
   };

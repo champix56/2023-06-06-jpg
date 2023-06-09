@@ -1,5 +1,5 @@
 import { ADR_REST as REST_ADR } from "../config/config.js"
-class Meme {
+export class Meme {
     static ressourceName = '/memes'
     titre = ""
     text = ""
