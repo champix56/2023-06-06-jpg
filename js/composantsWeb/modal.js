@@ -42,7 +42,7 @@ class Modal {
  * @param {string} titre titre du message
  * @param {HTMLElement|string} content contenu html du message
  */
-    showModal = (titre, content) => {
+    show(titre, content) {
         if (null !== this.#modalNode) {
             this.#removeModal()
         }
@@ -63,7 +63,7 @@ class Modal {
        
     }
 }
-export class ConfirmBox extends Modal{
+export class MessageBox extends Modal{
     #okCallback;
     #okButton;
     set okCallback(fn){
@@ -86,12 +86,12 @@ export class ConfirmBox extends Modal{
         //appel d'une fonction public du parent lié a notre instance étendue
         this.setButtons([this.#okButton]);
     }
-    showMessageBox=(titre,content,okfn)=>{
+    show=(titre,content,okfn)=>{
         this.okCallback=okfn
-        this.showModal(titre,content)
+        super.show(titre,content)
     }
 }
-export class MessageBox extends Modal{
+export class ConfirmBox extends Modal{
     #okCallback;
     #okButton;
     set okCallback(fn){
@@ -132,10 +132,10 @@ export class MessageBox extends Modal{
         //appel d'une fonction public du parent lié a notre instance étendue
         this.setButtons([this.#okButton,this.#cancelButton])
     }
-    showMessageBox=(titre,content,okfn,cancelfn)=>{
+    show(titre,content,okfn,cancelfn){
         this.okCallback=okfn
         this.cancelCallback=cancelfn
-        this.showModal(titre,content)
+        super.show(titre,content)
     }
 }
 // console.time('constructMsgBox')
